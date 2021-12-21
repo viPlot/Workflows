@@ -3,6 +3,8 @@ package spring.service.command;
 import spring.db.DBService;
 import spring.service.command.type.CommandType;
 
+import java.sql.SQLException;
+
 public class FindAll extends Command {
     public FindAll(DBService db) {
         super(db);
@@ -14,7 +16,7 @@ public class FindAll extends Command {
     }
 
     @Override
-    public CommandType doCommand() {
+    public CommandType doCommand() throws SQLException {
         return super.getDBService().findAll();
     }
 }
