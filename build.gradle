@@ -1,41 +1,33 @@
 plugins {
     id 'java'
     id 'application'
+    id 'org.springframework.boot' version '2.5.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
-
-group 'org.example'
-version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-    // https://mvnrepository.com/artifact/org.springframework/spring-context
-    implementation group: 'org.springframework', name: 'spring-context', version: '5.3.12'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'com.h2database:h2:1.200'
 
-
-    // https://mvnrepository.com/artifact/org.projectlombok/lombok
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.20'
-
-    // https://mvnrepository.com/artifact/org.springframework/spring-aop
-    implementation group: 'org.springframework', name: 'spring-aop', version: '5.3.13'
-
-    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.6.1'
-
-    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.8.0-beta4'
-
-    implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.20'
-    testImplementation group: 'org.postgresql', name: 'postgresql', version: '42.2.20'
-
+    implementation group: 'org.springframework', name: 'spring-aop', version: '5.3.13'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.6.1'
+    implementation 'org.springframework.shell:spring-shell-starter:2.0.0.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter:2.6.1'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.postgresql:postgresql:42.2.24'
 }
-application {
-    mainClassName("spring.App")
+
+bootRun {
+    standardInput = System.in
 }
 
 test {
