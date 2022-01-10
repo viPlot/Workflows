@@ -1,2 +1,2 @@
-# SpringDB #6
-Using Spring Data JPA
+# SpringDB #7
+Using Spring MVC REST
