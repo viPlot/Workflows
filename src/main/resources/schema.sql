@@ -1,4 +1,4 @@
-drop table if exists branch cascsde;
+drop table if exists branch cascade;
 CREATE TABLE Branch (
     id serial NOT NULL PRIMARY KEY,
     city text unique NOT NULL,
