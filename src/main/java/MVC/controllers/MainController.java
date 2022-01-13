@@ -4,7 +4,9 @@ import MVC.domain.Assignment;
 import MVC.repository.AssignmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
 
@@ -13,10 +15,15 @@ public class MainController {
     @Autowired
     private AssignmentRepository assignmentRepository;
 
+    @GetMapping("/")
+    public String greeting(Map<String, Object> model) {
+        return "greeting";
+    }
+
     @GetMapping("/main")
-    public String main(Map<String, Object> model) {
+    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
         Iterable<Assignment> assignments = assignmentRepository.findAll();
-        model.put("assignments", assignments);
-        return "main_page";
+        model.addAttribute("assignments", assignments);
+        return "main";
     }
 }

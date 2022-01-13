@@ -3,20 +3,20 @@ package MVC.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class Document {
+public class Document implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "filename")
+    private String filename;
 
     @Column(name = "status")
     private boolean status;
@@ -33,4 +33,11 @@ public class Document {
 
     @Column(name = "specialist_department_signature")
     private boolean specDepartmentSignature;
+
+    @Column(name = "file")
+    private byte[] data;
+
+    public Document(byte[] data) {
+        this.data = data;
+    }
 }

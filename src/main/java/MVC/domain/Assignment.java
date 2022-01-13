@@ -4,6 +4,8 @@ package MVC.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Collections;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -12,6 +14,12 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 public class Assignment {
+    public Assignment(String name, User user) {
+        this.name = name;
+        this.idCreator = user;
+        isDocument = false;
+        status = Collections.singleton(Status.active);
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,16 +28,18 @@ public class Assignment {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "status")
-    private boolean status;
-
-    @Column(name = "id_creator")
-    private Long idCreator;
-
-    @JoinColumn(name = "id_document")
-    @OneToOne
-    private Document idDocument;
+    @Column(name = "creator")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User idCreator;
 
     @Column(name = "is_document")
     private boolean isDocument;
+
+    @ElementCollection(targetClass = Status.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "assignment_status", joinColumns = @JoinColumn(name = "assignment_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Status> status;
+
+
 }

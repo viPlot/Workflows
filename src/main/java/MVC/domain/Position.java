@@ -1,22 +1,18 @@
 package MVC.domain;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
-@Table(name = "position")
-public class Position {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
 
-    @Column(name = "name")
-    private String name;
+public enum Position implements GrantedAuthority {
+    director,
+    headOfDepartment,
+    departmentSpecialist;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }
